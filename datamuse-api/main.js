@@ -9,7 +9,7 @@ const responseField = document.querySelector('#responseField');
 // Asynchronous function
 const getSuggestions = () => {
   const wordQuery = inputField.value; //get what user typed in input field 
-  const endpoint = url + wordQuery; 
+  const endpoint = `${url}${wordQuery}`; 
   
   //fetch 
   fetch(endpoint, {cache: 'no-cache'})
@@ -20,6 +20,10 @@ const getSuggestions = () => {
     throw new Error('Request failed!',
     ); 
   }, networkError => console.log(networkError.message)
+  ).then( jsonResponse => {
+    //renderRawResponse(jsonResponse);
+    renderResponse(jsonResponse);  
+  }
   );
 
 // Clears previous results and display results to webpage
